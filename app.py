@@ -2,13 +2,13 @@ from flask import *
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
-    return render_template("home.html")
+    if request.method == "POST":
+        print(request.form["name"])
+        print(request.form["email"])
 
-@app.route("/about")
-def about():
-    return render_template("about.html")
+    return render_template("home.html")
 
 if __name__ == "__main__":
     app.run()
